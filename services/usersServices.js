@@ -1,8 +1,10 @@
 const USER_REGISTERED_MESSAGE = 'User already registered';
 const INVALID_FIELDS_MESSAGE = 'Invalid fields';
+const TOKEN_NOT_FOUND_MESSAGE = 'Token not found';
+const TOKEN_INVALID_MESSAGE = 'Expired or invalid token';
 
 const { User } = require('../models');
-const { genToken } = require('./authService');
+const { genToken, verifyToken } = require('./authService');
 const 
 {
   validateAllCreateUserCredentials,
@@ -38,7 +40,20 @@ const loginUserService = async (credentials) => {
   return { status: 200, answer: tokenOBJ };
 };
 
+const getAllUsersService = async (token) => {
+  if (!token) {
+    return createErrorMessage(TOKEN_NOT_FOUND_MESSAGE, 401);
+  }
+  const tokenVerified = verifyToken(token);
+  if (!tokenVerified) {
+    return createErrorMessage(TOKEN_INVALID_MESSAGE, 401);
+  }
+  const users = await User.findAll();
+  return { status: 200, answer: users };
+};
+
 module.exports = {
   createUserService,
   loginUserService,
+  getAllUsersService,
 };

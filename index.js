@@ -1,5 +1,9 @@
 const express = require('express');
-const { createUserController, loginUserController } = require('./controllers/userController');
+const { 
+  createUserController,
+  loginUserController,
+  getAllUsersController,
+} = require('./controllers/userController');
 
 const app = express();
 app.use(express.json());
@@ -8,6 +12,8 @@ app.use(express.json());
 app.get('/', (request, response) => {
   response.send();
 });
+
+app.get('/user', getAllUsersController);
 
 app.post('/user', createUserController);
 app.post('/login', loginUserController);

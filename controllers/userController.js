@@ -1,4 +1,9 @@
-const { createUserService, loginUserService } = require('../services/usersServices');
+const 
+{
+   createUserService,
+   loginUserService,
+   getAllUsersService, 
+} = require('../services/usersServices');
 
 const createUserController = async (req, res, _next) => {
   const userOBJ = {
@@ -8,7 +13,7 @@ const createUserController = async (req, res, _next) => {
     image: req.body.image,
   };
   const answerUser = await createUserService(userOBJ);
-  res.status(answerUser.status).json(answerUser.answer);
+  return res.status(answerUser.status).json(answerUser.answer);
 };
 
 const loginUserController = async (req, res, _next) => {
@@ -17,10 +22,17 @@ const loginUserController = async (req, res, _next) => {
     password: req.body.password,
   };
   const answerUser = await loginUserService(credentials);
-  res.status(answerUser.status).json(answerUser.answer);
+  return res.status(answerUser.status).json(answerUser.answer);
+};
+
+const getAllUsersController = async (req, res, _next) => {
+  const token = req.headers.authorization;
+  const answerUser = await getAllUsersService(token);
+  return res.status(answerUser.status).json(answerUser.answer);
 };
 
 module.exports = {
   createUserController,
   loginUserController,
+  getAllUsersController,
 };
