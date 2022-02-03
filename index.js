@@ -3,6 +3,7 @@ const {
   createUserController,
   loginUserController,
   getAllUsersController,
+  getAUserController,
 } = require('./controllers/userController');
 
 const app = express();
@@ -14,6 +15,7 @@ app.get('/', (request, response) => {
 });
 
 app.get('/user', getAllUsersController);
+app.get('/user/:id', getAUserController);
 
 app.post('/user', createUserController);
 app.post('/login', loginUserController);

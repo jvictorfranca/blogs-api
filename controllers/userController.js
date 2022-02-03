@@ -2,7 +2,8 @@ const
 {
    createUserService,
    loginUserService,
-   getAllUsersService, 
+   getAllUsersService,
+   getAUserService, 
 } = require('../services/usersServices');
 
 const createUserController = async (req, res, _next) => {
@@ -27,7 +28,14 @@ const loginUserController = async (req, res, _next) => {
 
 const getAllUsersController = async (req, res, _next) => {
   const token = req.headers.authorization;
-  const answerUser = await getAllUsersService(token);
+  const answerUsers = await getAllUsersService(token);
+  return res.status(answerUsers.status).json(answerUsers.answer);
+};
+
+const getAUserController = async (req, res, _next) => {
+  const token = req.headers.authorization;
+  const { id } = req.params;
+  const answerUser = await getAUserService(token, id);
   return res.status(answerUser.status).json(answerUser.answer);
 };
 
@@ -35,4 +43,5 @@ module.exports = {
   createUserController,
   loginUserController,
   getAllUsersController,
+  getAUserController,
 };
