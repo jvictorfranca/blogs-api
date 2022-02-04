@@ -1,5 +1,9 @@
 const express = require('express');
-const { createCategoryController, getAllCategoriesController } = require('./controllers/categoryController');
+const 
+    {
+    createCategoryController,
+    getAllCategoriesController,
+    } = require('./controllers/categoryController');
 const { 
   createUserController,
   loginUserController,
