@@ -5,6 +5,7 @@ const {
   getAllUsersController,
   getAUserController,
 } = require('./controllers/userController');
+const authMiddleware = require('./middlewares/authmiddleware');
 
 const app = express();
 app.use(express.json());
@@ -14,8 +15,8 @@ app.get('/', (request, response) => {
   response.send();
 });
 
-app.get('/user', getAllUsersController);
-app.get('/user/:id', getAUserController);
+app.get('/user', authMiddleware, getAllUsersController);
+app.get('/user/:id', authMiddleware, getAUserController);
 
 app.post('/user', createUserController);
 app.post('/login', loginUserController);

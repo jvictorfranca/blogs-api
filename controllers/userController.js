@@ -27,15 +27,13 @@ const loginUserController = async (req, res, _next) => {
 };
 
 const getAllUsersController = async (req, res, _next) => {
-  const token = req.headers.authorization;
-  const answerUsers = await getAllUsersService(token);
+  const answerUsers = await getAllUsersService();
   return res.status(answerUsers.status).json(answerUsers.answer);
 };
 
 const getAUserController = async (req, res, _next) => {
-  const token = req.headers.authorization;
   const { id } = req.params;
-  const answerUser = await getAUserService(token, id);
+  const answerUser = await getAUserService(id);
   return res.status(answerUser.status).json(answerUser.answer);
 };
 
