@@ -16,6 +16,7 @@ const authMiddleware = async (req, res, next) => {
     const answerOBJ = createErrorMessage(TOKEN_INVALID_MESSAGE, 401);
     return res.status(answerOBJ.status).json(answerOBJ.answer);
   }
+  req.user = tokenVerified;
 
   next();
 };

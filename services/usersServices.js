@@ -18,7 +18,6 @@ const createUserService = async (userOBJ) => {
      return validateAllCreateUserCredentials(userOBJ); 
 }
 const userFound = await User.findOne({ where: { email: userOBJ.email } });
-console.log(userFound);
 if (userFound) {
   return createErrorMessage(USER_REGISTERED_MESSAGE, 409);
 }
@@ -35,7 +34,7 @@ const loginUserService = async (credentials) => {
     return createErrorMessage(INVALID_FIELDS_MESSAGE);
   }
   const tokenOBJ = {
-    token: genToken({ email: userFound.email }),
+    token: genToken({ email: userFound.email, id: userFound.id }),
   };
   return { status: 200, answer: tokenOBJ };
 };

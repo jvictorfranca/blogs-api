@@ -1,4 +1,5 @@
 const express = require('express');
+const { createCategoryController } = require('./controllers/categoryController');
 const { 
   createUserController,
   loginUserController,
@@ -15,10 +16,14 @@ app.get('/', (request, response) => {
   response.send();
 });
 
+// gets
 app.get('/user', authMiddleware, getAllUsersController);
 app.get('/user/:id', authMiddleware, getAUserController);
 
+// posts
 app.post('/user', createUserController);
 app.post('/login', loginUserController);
+
+app.post('/categories', authMiddleware, createCategoryController);
 
 app.listen(3000, () => console.log('ouvindo porta 3000!'));
