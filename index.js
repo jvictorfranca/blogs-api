@@ -1,5 +1,5 @@
 const express = require('express');
-const { createCategoryController } = require('./controllers/categoryController');
+const { createCategoryController, getAllCategoriesController } = require('./controllers/categoryController');
 const { 
   createUserController,
   loginUserController,
@@ -19,6 +19,8 @@ app.get('/', (request, response) => {
 // gets
 app.get('/user', authMiddleware, getAllUsersController);
 app.get('/user/:id', authMiddleware, getAUserController);
+
+app.get('/categories', authMiddleware, getAllCategoriesController);
 
 // posts
 app.post('/user', createUserController);
