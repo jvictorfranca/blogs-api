@@ -4,6 +4,7 @@ const
     createCategoryController,
     getAllCategoriesController,
     } = require('./controllers/categoryController');
+const { createPostController } = require('./controllers/postController');
 const { 
   createUserController,
   loginUserController,
@@ -29,6 +30,7 @@ app.get('/categories', authMiddleware, getAllCategoriesController);
 // posts
 app.post('/user', createUserController);
 app.post('/login', loginUserController);
+app.post('/post', authMiddleware, createPostController);
 
 app.post('/categories', authMiddleware, createCategoryController);
 

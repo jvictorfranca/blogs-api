@@ -1,0 +1,6 @@
+npx sequelize-cli init
+npx sequelize db:create
+npx sequelize model:generate --name User --attributes displayName:string    
+npx sequelize migration:generate --name create-users
+npx sequelize db:migrate
+npx sequelize model:generate --name Category --attributes name:string

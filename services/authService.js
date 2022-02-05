@@ -3,7 +3,7 @@ require('dotenv').config();
 
 const API_SECRET = process.env.JWT_SECRET || 'GNE1UI64AO3G1N';
 const JWT_CONFIG = {
-  expiresIn: 60,
+  expiresIn: '60m',
   algorithm: 'HS256',
 };
 

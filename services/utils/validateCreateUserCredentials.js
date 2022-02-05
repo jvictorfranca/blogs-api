@@ -8,7 +8,7 @@ const EMAIL_NOT_EMPTY_MESSAGE = '"email" is not allowed to be empty';
 const createErrorMessage = (message, status = 400) => ({ answer: { message }, status });
 
 const isEmailValid = (email) => {
-  if (!email.includes('@') || !email.includes('.com')) { console.log('aqui'); return false; } 
+  if (!email.includes('@') || !email.includes('.com')) { return false; } 
   if (email.indexOf('@') < 2) { return false; }
   return true;
 }; 
