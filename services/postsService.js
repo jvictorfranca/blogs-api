@@ -1,6 +1,6 @@
 const CATEGORY_ID_NOT_FOUND_MESSAGE = '"categoryIds" not found';
 
-const { BlogPost, PostsCategory, Category } = require('../models');
+const { BlogPost, PostsCategory, Category, User } = require('../models');
 const { validateCreatePost, createErrorMessage } = require('./utils/validateCreatePost');
 
 const createPostService = async (postOBJ) => {
@@ -25,8 +25,18 @@ const createPostService = async (postOBJ) => {
 };
 
 const getAllPostsService = async () => {
-  const categories = await BlogPost.findAll();
-  return { status: 200, answer: categories };
+  const posts = await BlogPost.findAll(
+    { attributes: [
+      'id', 'userId', 'title', 'content',
+       ['updated', 'updated'], ['published', 'published'],
+    ],
+       include: 
+       [
+          { model: Category, as: 'categories', through: { attributes: [] } },
+          { model: User, as: 'user' },
+        ] },
+);
+  return { status: 200, answer: posts };
 };
 
 module.exports = {

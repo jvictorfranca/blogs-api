@@ -1,4 +1,5 @@
-const { createPostService /* getAllPostsService */ } = require('../services/postsService');
+const { createPostService, /* getAllPostsService */ 
+getAllPostsService } = require('../services/postsService');
 
 const createPostController = async (req, res, _next) => {
   const postOBJ = {
@@ -11,12 +12,12 @@ const createPostController = async (req, res, _next) => {
   return res.status(answerUser.status).json(answerUser.answer);
 };
 
-const getAllCategoriesController = async (_req, _res, _next) => {
-  // const answerCategories = await getAllCategoriesService();
-  // return res.status(answerCategories.status).json(answerCategories.answer);
+const getAllPostsController = async (req, res, _next) => {
+  const answerPosts = await getAllPostsService();
+  return res.status(answerPosts.status).json(answerPosts.answer);
 };
 
 module.exports = {
   createPostController,
-  getAllCategoriesController,
+  getAllPostsController,
 };
